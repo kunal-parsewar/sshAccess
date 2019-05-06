@@ -1,0 +1,13 @@
+---
+- hosts: group1
+  tasks:
+    - name: giving access ssh access
+      authorized_key:
+        user: demouser
+        state: present
+        key: "{{ lookup('file', '/home/demouser/.ssh/id_rsa.pub') }}"
+    - name: revoking ssh access
+      authorized_key:
+        user: demouser
+        state: absent
+        key: "{{ lookup('file', '/home/demouser/.ssh/id_rsa.pub') }}"
